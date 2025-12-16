@@ -1,0 +1,27 @@
+.TH simple_shell 1 "" "Holberton School" "User Commands"
+
+.SH NAME
+simple_shell \- simple UNIX command interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+
+.SH DESCRIPTION
+.B simple_shell
+is a small shell that reads a line from standard input, parses it into a command and its arguments, and executes it. [web:16]
+In interactive mode it displays a prompt and waits for user input; in non\-interactive mode it reads and executes commands until EOF. [web:16][web:21]
+
+.SH BUILTINS
+.TP
+.B exit
+Exit the shell with an optional status.
+.TP
+.B env
+Print the current environment. [web:5]
+
+.SH RETURN VALUE
+Returns the status of the last executed command, or a non\-zero value on error. [web:19]
+
+.SH SEE ALSO
+.BR sh (1),
+.BR bash (1)
