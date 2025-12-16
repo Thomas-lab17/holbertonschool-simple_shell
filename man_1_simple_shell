@@ -8,8 +8,8 @@ simple_shell \- simple UNIX command interpreter
 
 .SH DESCRIPTION
 .B simple_shell
-is a small shell that reads a line from standard input, parses it into a command and its arguments, and executes it. [web:16]
-In interactive mode it displays a prompt and waits for user input; in non\-interactive mode it reads and executes commands until EOF. [web:16][web:21]
+is a small shell that reads a line from standard input, parses it into a command and its arguments, and executes it. 
+In interactive mode it displays a prompt and waits for user input; in non\-interactive mode it reads and executes commands until EOF. 
 
 .SH BUILTINS
 .TP
@@ -17,10 +17,10 @@ In interactive mode it displays a prompt and waits for user input; in non\-inter
 Exit the shell with an optional status.
 .TP
 .B env
-Print the current environment. [web:5]
+Print the current environment. 
 
 .SH RETURN VALUE
-Returns the status of the last executed command, or a non\-zero value on error. [web:19]
+Returns the status of the last executed command, or a non\-zero value on error. 
 
 .SH SEE ALSO
 .BR sh (1),
