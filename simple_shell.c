@@ -10,9 +10,9 @@ void display_prompt(void)
 
 char *read_user_command(void)
 {
-	char *line = NULL; //*buffer where line will be stock
-	size_t len = 0; //*size of buffer
-	ssize_t read; //* number of charactere read
+	char *line = NULL; 
+	size_t len = 0; 
+	ssize_t read; 
 
 	read = getline(&line, &len, stdin);
 
@@ -43,8 +43,9 @@ int check_command(char *command)
 void execute_command(char *command)
 {
 	pid_t pid;
-	char *argv[] = {command, NULL};
-
+	char *argv[2];
+	argv[0] = command;
+	argv[1] = NULL;
 	pid = fork();
 
 	if (pid == -1)
