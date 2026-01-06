@@ -9,5 +9,6 @@
 #include <string.h>
 #include <sys/stat.h>
 
+char *read_command(void);
 
 #endif
