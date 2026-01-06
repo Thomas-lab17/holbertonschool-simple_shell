@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include "simple_shell.h"
 
 extern char **environ;
@@ -73,7 +74,7 @@ int main(void)
 	{
 		display_prompt();
 
-		command = read_command();
+		command = read_user_command();
 		if (command == NULL)
 		{
 			write(STDOUT_FILENO, "\n", 1);
