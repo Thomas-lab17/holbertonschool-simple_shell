@@ -10,9 +10,9 @@ void display_prompt(void)
 
 char *read_user_command(void)
 {
-	char *line = NULL; 
-	size_t len = 0; 
-	ssize_t read; 
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t read;
 
 	read = getline(&line, &len, stdin);
 
@@ -28,23 +28,73 @@ char *read_user_command(void)
 	return(line);
 }
 
-int check_command(char *command)
+int check_command(char *path)
 {
 	struct stat st;
 
-	if (stat(command, &st) == -1)
+	if (stat(path, &st) == -1)
 		return (0);
 
-	if (!(st.st_mode &( S_IXUSR || S_IXGRP || S_IXOTH)))
+	if (!(st.st_mode & (S_IXUSR || S_IXGRP || S_IXOTH)))
 		return (0);
 
 	return (1);
 }
-void execute_command(char *command)
+
+char *find_command_in_path(char *command)
+{
+	char *path_env, *path_copy, *dir, *full_path;
+	int i;
+
+	if (strchr(command, '/'))
+	{
+		if (check_command(command))
+			return (strdup(command));
+		return (NULL);
+	}
+
+	for (i = 0; environ[i]; i++)
+	{
+		if (strncmp(environ[i], "PATH=", 5) == 0)
+		{
+			path_env = environ[i] + 5;
+			break;
+		}
+	}
+
+	if (!path_env)
+		return (NULL);
+
+	path_copy = strdup(path_env);
+	dir = strtok(path_copy, ":");
+
+	while (dir)
+	{
+		full_path = malloc(strlen(dir) + strlen(command) + 2);
+		if (!full_path)
+			break;
+
+		sprintf(full_path, "%s/%s", dir, command);
+
+		if (check_command(full_path))
+		{
+			free(path_copy);
+			return (full_path);
+		}
+
+		free(full_path);
+		dir = strtok(NULL, ":");
+	}
+
+	free(path_copy);
+	return (NULL);
+}
+
+void execute_command(char *path)
 {
 	pid_t pid;
 	char *argv[2];
-	argv[0] = command;
+	argv[0] = path;
 	argv[1] = NULL;
 	pid = fork();
 
@@ -56,12 +106,11 @@ void execute_command(char *command)
 
 	if (pid == 0)
 	{
-		if (execve(command, argv, environ) == -1)
-		{
-			perror("execve");
-			exit(EXIT_FAILURE);
-		}
+		execve(path, argv, environ);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
+
 	else
 	{
 		wait(NULL);
@@ -70,6 +119,7 @@ void execute_command(char *command)
 int main(void)
 {
 	char *command;
+	char *path;
 
 	while (1)
 	{
@@ -88,14 +138,18 @@ int main(void)
 			continue;
 		}
 
-		if (!check_command(command))
+		path = find_command_in_path(command);
+		if (!path)
+
 		{
 			write(STDERR_FILENO, "Command not found\n", 18);
 			free(command);
 			continue;
 		}
 
-		execute_command(command);
+		execute_command(path);
+
+		free(path);
 		free(command);
 	}
 
