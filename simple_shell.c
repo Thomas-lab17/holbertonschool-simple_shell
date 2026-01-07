@@ -35,7 +35,7 @@ int check_command(char *command)
 	if (stat(command, &st) == -1)
 		return (0);
 
-	if (!(st.st_mode & S_IXUSR || S_IXGRP || S_IXOTH))
+	if (!(st.st_mode &( S_IXUSR || S_IXGRP || S_IXOTH)))
 		return (0);
 
 	return (1);
