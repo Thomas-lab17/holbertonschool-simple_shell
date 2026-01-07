@@ -1,27 +1,79 @@
-.TH simple_shell 1 "" "Holberton School" "User Commands"
-
+.TH SIMPLE_SHELL 1 "January 2026" "Holberton School" "User Commands Manual"
 .SH NAME
-simple_shell \- simple UNIX command interpreter
-
+simple_shell - minimal command interpreter
 .SH SYNOPSIS
-.B simple_shell
-
+.B ./hsh
+.br
+.B echo "command" | ./hsh
 .SH DESCRIPTION
+The
 .B simple_shell
-is a small shell that reads a line from standard input, parses it into a command and its arguments, and executes it. 
-In interactive mode it displays a prompt and waits for user input; in non\-interactive mode it reads and executes commands until EOF. 
-
-.SH BUILTINS
-.TP
-.B exit
-Exit the shell with an optional status.
-.TP
-.B env
-Print the current environment. 
-
+program is a minimal UNIX command interpreter.
+It reads commands from standard input, parses them into a command name and arguments,
+searches the command in the
+.B PATH
+environment variable when needed, and executes it in a child process.
+.PP
+If standard input is a terminal, it displays a prompt:
+.IP
+$
+.PP
+Command execution rules:
+.IP
+If the command contains a
+.B /
+character, it is treated as a direct path and executed if permitted.
+.IP
+Otherwise, the shell searches each directory listed in
+.B PATH
+and executes the first matching executable found.
+.IP
+Arguments are separated by spaces and tabs.
+.PP
+This shell does not implement advanced parsing (quotes, escapes, pipes, redirections, separators, variables, globbing).
 .SH RETURN VALUE
-Returns the status of the last executed command, or a non\-zero value on error. 
+The program returns
+.B 0
+on normal exit.
+Commands are executed in a child process; this shell waits for the child to finish.
+.SH EXAMPLES
+.nf
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-.SH SEE ALSO
-.BR sh (1),
-.BR bash (1)
+/**
+ * main - Example usage (interactive and non-interactive)
+ *
+ * Return: Always 0
+ */
+int main(void)
+{
+    /* Interactive example:
+     * $ ./hsh
+     * $ ls -l /tmp
+     * $ /bin/echo hello world
+     * (Ctrl-D to exit)
+     */
+
+    /* Non-interactive example:
+     * $ echo "ls -la" | ./hsh
+     */
+
+    return (0);
+}
+.fi
+.SH BUGS
+This shell is intentionally minimal.
+.PP
+Limitations include:
+.IP
+No builtins (e.g. exit, env).
+.IP
+No support for quotes, escapes, pipes, redirections, command separators, or logical operators.
+.IP
+Error messages are basic (e.g. "Command not found") and may not match
+.BR sh (1)
+exactly.
+.SH AUTHOR
+Holberton School student (France)
