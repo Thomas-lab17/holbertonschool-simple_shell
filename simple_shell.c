@@ -1,4 +1,4 @@
-#define _POSIX_C_SOURCE 200809L
+
 #include "simple_shell.h"
 
 extern char **environ;
@@ -90,13 +90,9 @@ char *find_command_in_path(char *command)
 	return (NULL);
 }
 
-void execute_command(char *path)
+void execute_command(char *path, char **argv)
 {
-	pid_t pid;
-	char *argv[2];
-	argv[0] = path;
-	argv[1] = NULL;
-	pid = fork();
+	pid_t pid = fork();
 
 	if (pid == -1)
 	{
@@ -110,7 +106,6 @@ void execute_command(char *path)
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-
 	else
 	{
 		wait(NULL);
@@ -122,36 +117,75 @@ int main(void)
 	char *path;
 
 	while (1)
+{
+	char **argv = NULL;
+	size_t argc = 0, cap = 8;
+	char *token;
+
+	display_prompt();
+
+	command = read_user_command();
+	if (command == NULL)
 	{
-		display_prompt();
-
-		command = read_user_command();
-		if (command == NULL)
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			break;
-		}
-
-		if (strlen(command) == 0)
-		{
-			free(command);
-			continue;
-		}
-
-		path = find_command_in_path(command);
-		if (!path)
-
-		{
-			write(STDERR_FILENO, "Command not found\n", 18);
-			free(command);
-			continue;
-		}
-
-		execute_command(path);
-
-		free(path);
-		free(command);
+		write(STDOUT_FILENO, "\n", 1);
+		break;
 	}
+
+	argv = malloc(sizeof(char *) * cap);
+	if (!argv)
+	{
+		free(command);
+		continue;
+	}
+
+	token = strtok(command, " \t");
+	while (token)
+	{
+		if (argc + 1 >= cap)
+		{
+			char **tmp;
+			cap *= 2;
+			tmp = realloc(argv, sizeof(char *) * cap);
+			if (!tmp)
+			{
+				free(argv);
+				free(command);
+				argv = NULL;
+				break;
+			}
+			argv = tmp;
+		}
+
+		argv[argc++] = token;
+		token = strtok(NULL, " \t");
+	}
+
+	if (!argv)
+		continue;
+
+	argv[argc] = NULL;
+
+	if (argc == 0)
+	{
+		free(argv);
+		free(command);
+		continue;
+	}
+	path = find_command_in_path(argv[0]);
+	if (!path)
+	{
+		write(STDERR_FILENO, "Command not found\n", 18);
+		free(argv);
+		free(command);
+		continue;
+	}
+
+	execute_command(path, argv);
+
+	free(path);
+	free(argv);
+	free(command);
+}
 
 	return (0);
 }
