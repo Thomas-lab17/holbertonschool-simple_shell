@@ -11,5 +11,12 @@
 #include <sys/stat.h>
 
 char *read_command(void);
+void execute_command(char *path, char **argv);
+int check_command(char *path);
+void display_prompt(void);
+char *find_command_in_path(char *command);
+char *read_user_command(void);
+extern char **environ;
+
 
 #endif
