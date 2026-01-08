@@ -1,4 +1,4 @@
-#define _POSIX_C_SOURCE 200809L
+
 #include "simple_shell.h"
 
 extern char **environ;
@@ -131,7 +131,6 @@ int main(void)
 		break;
 	}
 
-	/* Build argv from command (splits on spaces/tabs) */
 	argv = malloc(sizeof(char *) * cap);
 	if (!argv)
 	{
@@ -172,8 +171,6 @@ int main(void)
 		free(command);
 		continue;
 	}
-
-	/* IMPORTANT: search PATH using argv[0], not the whole line */
 	path = find_command_in_path(argv[0]);
 	if (!path)
 	{
