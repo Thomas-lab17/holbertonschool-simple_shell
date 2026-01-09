@@ -76,4 +76,5 @@ Error messages are basic (e.g. "Command not found") and may not match
 .BR sh (1)
 exactly.
 .SH AUTHOR
-Holberton School student (France)
+Thomas CHARIER LERAY
+Arthur MOULARD

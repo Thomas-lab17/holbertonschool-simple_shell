@@ -1,4 +1,3 @@
-
 #include "simple_shell.h"
 
 extern char **environ;
