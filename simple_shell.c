@@ -12,7 +12,7 @@ int main(void)
 {
 	char **argv = NULL;
 	size_t argc = 0, cap = 8;
-	char *token;
+	char *token;	
 
 	display_prompt();
 
@@ -29,6 +29,7 @@ int main(void)
 		free(command);
 		continue;
 	}
+	
 
 	token = strtok(command, " \t");
 	while (token)
