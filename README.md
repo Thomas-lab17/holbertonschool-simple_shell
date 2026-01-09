@@ -53,6 +53,9 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o simple_shell
 
 ## **Flowchart**
 
+```md
+![Flowchart](flowchart_simple_shell.png)
+```
 
 ## **Example Usage**
 
