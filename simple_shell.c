@@ -14,7 +14,8 @@ int main(void)
 	size_t argc = 0, cap = 8;
 	char *token;	
 
-	display_prompt();
+	if (isatty(STDIN_FILENO))
+		display_prompt();
 
 	command = read_user_command();
 	if (command == NULL)
@@ -29,7 +30,6 @@ int main(void)
 		free(command);
 		continue;
 	}
-	
 
 	token = strtok(command, " \t");
 	while (token)
