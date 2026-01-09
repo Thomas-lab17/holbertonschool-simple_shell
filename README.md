@@ -81,6 +81,7 @@ write (man 2 write)
 
 ## **Flowchart**
 
+![Flowchart](flowchart_simple_shell.png)
 
 ## **Example Usage**
 
