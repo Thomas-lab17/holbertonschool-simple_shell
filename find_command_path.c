@@ -2,7 +2,7 @@
 
 char *find_command_in_path(char *command)
 {
-	char *path_env, *path_copy, *dir, *full_path;
+	char *path_env = NULL, *path_copy, *dir, *full_path;
 	int i;
 
 	if (strchr(command, '/'))
