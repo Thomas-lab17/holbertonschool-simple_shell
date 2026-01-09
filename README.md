@@ -79,9 +79,7 @@ write (man 2 write)
 
 ## **Flowchart**
 
-```md
 ![Flowchart](flowchart_simple_shell.png)
-```
 
 ## **Example Usage**
 
