@@ -86,7 +86,7 @@ write (man 2 write)
 
 **Run the shell:**
 ```bash
-./simple_shell
+./hsh
 ```
 
 **Example session (no PATH, so use full paths):**
@@ -113,4 +113,5 @@ $ ^D
 ## **Authors**
 - [Thomas CHARIER LERAY](https://github.com/Thomas-lab17).  
 - [Arthur MOULARD](https://github.com/arthurmoulard).
+
 
