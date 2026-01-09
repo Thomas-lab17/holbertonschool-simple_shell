@@ -83,5 +83,5 @@ $ ^D
 ---
 
 ## **Authors**
-- Thomas CHARIER LERAY  
-- Arthur MOULARD
+- [Thomas CHARIER LERAY](https://github.com/Thomas-lab17).  
+- [Arthur MOULARD](https://github.com/arthurmoulard).
