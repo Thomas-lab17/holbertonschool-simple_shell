@@ -34,6 +34,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o simple_shell
 **3. Coding Style:** you must use the betty style coding and documentation
 
 **4. authorized functions and macros :**
+```bash
 all functions from string.h
 access (man 2 access)
 chdir (man 2 chdir)
@@ -71,6 +72,7 @@ waitpid (man 2 waitpid)
 wait3 (man 2 wait3)
 wait4 (man 2 wait4)
 write (man 2 write)
+```
 
 **5. File Endings:** Ensure that all source code files (.c files) end with a newline character (\n).
 
@@ -111,3 +113,4 @@ $ ^D
 ## **Authors**
 - [Thomas CHARIER LERAY](https://github.com/Thomas-lab17).  
 - [Arthur MOULARD](https://github.com/arthurmoulard).
+
