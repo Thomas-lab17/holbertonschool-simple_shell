@@ -65,6 +65,12 @@ int main(void)
 		free(command);
 		continue;
 	}
+	if (strcmp(argv[0], "exit") == 0)
+	{
+		free(argv);
+		free(command);
+		return (0);
+	}
 	path = find_command_in_path(argv[0]);
 	if (!path)
 	{
