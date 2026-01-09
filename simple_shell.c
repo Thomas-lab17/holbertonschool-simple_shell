@@ -20,7 +20,8 @@ int main(void)
 	command = read_user_command();
 	if (command == NULL)
 	{
-		write(STDOUT_FILENO, "\n", 1);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
 		break;
 	}
 
