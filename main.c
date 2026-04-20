@@ -14,14 +14,14 @@ int main(void)
         display_prompt();
         input = read_input();
 
-   		if (input == NULL)
-		{
-    		if (isatty(STDIN_FILENO))
-        	write(STDOUT_FILENO, "\n", 1);
-    		break;
-		}	
+        if (input == NULL)
+        {
+            if (isatty(STDIN_FILENO))
+                write(STDOUT_FILENO, "\n", 1);
+            break;
+        }
 
-        input[strcspn(input, "\n")] = '\0';
+        trim(input);
 
         if (input[0] != '\0')
             execute(input);
@@ -31,3 +31,14 @@ int main(void)
     return (0);
 }
 
+/* Strip trailing whitespace: newlines, spaces, tabs */
+void trim(char *str)
+{
+    int len = strlen(str) - 1;
+
+    while (len >= 0 && (str[len] == '\n' || str[len] == ' ' || str[len] == '\t'))
+    {
+        str[len] = '\0';
+        len--;
+	}
+}
