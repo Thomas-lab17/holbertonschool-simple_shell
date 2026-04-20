@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 /**
  * display_prompt - Displays the shell prompt.
  *

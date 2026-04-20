@@ -6,9 +6,11 @@
 #include <string.h>	
 #include <unistd.h>
 
+
 void display_prompt(void);
 char *read_input(void);
-char *get_path(char *command);
+char *get_path_value(void);
+char *get_path(const char *command);
 
 
 #endif
