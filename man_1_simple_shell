@@ -1,1 +1,79 @@
-filler
+
+.TH SIMPLE_SHELL 1 "April 2026" "simple_shell" "User Commands"
+
+.SH NAME
+simple_shell \- simple UNIX command interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+
+.SH DESCRIPTION
+simple_shell is a simple command-line interpreter that mimics basic
+features of a Unix shell.
+
+It reads commands from standard input and executes them. The shell
+supports execution of programs with arguments using the PATH environment
+variable.
+
+This shell is not intended to be a full implementation of a standard
+Unix shell and does not support all advanced features.
+
+.SH FEATURES
+.TP
+.B Command execution
+Executes external commands found in the PATH
+.TP
+.B Built-in commands
+Supports basic built-ins such as cd, exit, and env
+.TP
+.B Prompt
+Displays a prompt and waits for user input
+.TP
+.B End of file
+Handles Ctrl+D to exit the shell
+
+.SH BUILTIN COMMANDS
+.TP
+.B cd
+Change the current working directory
+.TP
+.B exit
+Exit the shell
+.TP
+.B env
+Display the current environment variables
+
+.SH EXAMPLES
+Execute a command:
+.PP
+ls -l
+.PP
+Change directory:
+.PP
+cd /tmp
+
+.SH RETURN VALUE
+Returns 0 on success, or a non-zero value on error.
+
+.SH LIMITATIONS
+This shell does not support:
+- pipes (|)
+- logical operators (&&, ||)
+- command separators (;)
+- wildcard expansion (*)
+
+.SH AUTHORS
+Madi MADI ANLI 
+Thomas CHARIERLERAY
+Alexander DURANT
+
+
+.SH STANDARDS
+POSIX
+
+.SH HISTORY
+The original Unix shell (sh) was developed by Stephen Bourne.
+This project is a simplified reimplementation for educational purposes.
+
+.SH BUGS
+No known bugs.
