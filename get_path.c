@@ -1,67 +1,60 @@
 #include "main.h"
-#include <sys/stat.h>
-
-char *get_path(const char *command)
-{
-    char *path_env, *path_copy, *dir, *full_path;
-    struct stat st;
-    
-    /* 1. Récupérer le contenu du PATH */
-    path_env = get_path_value(); /* La fonction qu'on a vue juste avant */
-    
-    if (!path_env)
-        return (NULL);
-
-    /* 2. Copier le PATH pour ne pas modifier l'original avec strtok */
-    path_copy = strdup(path_env);
-    
-    /* 3. Découper le PATH en dossiers (séparateur ':') */
-    dir = strtok(path_copy, ":");
-    while (dir != NULL)
-    {
-        /* Créer le chemin complet : dossier + / + commande */
-        /* Exemple : /bin + / + ls = /bin/ls */
-        full_path = malloc(strlen(dir) + strlen(command) + 2);
-        sprintf(full_path, "%s/%s", dir, command);
-
-        /* 4. Vérifier si le fichier existe à cet endroit */
-        if (stat(full_path, &st) == 0)
-        {
-            free(path_copy);
-            return (full_path); /* On a trouvé ! On renvoie le chemin */
-        }
-
-        free(full_path); /* Pas trouvé ici, on libère et on continue */
-        dir = strtok(NULL, ":");
-    }
-
-    free(path_copy);
-    return (NULL); /* La commande n'a été trouvée nulle part */
-}
 
 /**
- * get_path_value - Récupère la valeur de la variable d'environnement PATH.
+ * get_path_value - Gets the value of the PATH environment variable.
  *
- * Return: Un pointeur vers la valeur du PATH (après le '='), ou NULL.
+ * Return: A pointer to the PATH value, or NULL if not found.
  */
 char *get_path_value(void)
 {
-    int i = 0;
-    char *name = "PATH=";
-    extern char **environ; /* Accès global à l'environnement */
+	int	i = 0;
 
-    if (environ == NULL)
-        return (NULL);
+	if (environ == NULL)
+		return (NULL);
+	while (environ[i])
+	{
+		if (strncmp(environ[i], "PATH=", 5) == 0)
+			return (environ[i] + 5);
+		i++;
+	}
+	return (NULL);
+}
 
-    while (environ[i])
-    {
-        /* On compare les 5 premiers caractères pour trouver "PATH=" */
-        if (strncmp(environ[i], name, 5) == 0)
-        {
-            /* On retourne l'adresse juste après le '=' */
-            return (environ[i] + 5);
-        }
-        i++;
-    }
-    return (NULL);
+/**
+ * get_path - Finds the full path of a command by searching PATH.
+ * @command: the command name to search for
+ *
+ * Return: The full path string if found, or NULL if not found.
+ */
+char *get_path(const char *command)
+{
+	char		*path_env, *path_copy, *dir, *full_path;
+	struct stat	st;
+
+	path_env = get_path_value();
+	if (!path_env)
+		return (NULL);
+	path_copy = strdup(path_env);
+	if (!path_copy)
+		return (NULL);
+	dir = strtok(path_copy, ":");
+	while (dir != NULL)
+	{
+		full_path = malloc(strlen(dir) + strlen(command) + 2);
+		if (!full_path)
+		{
+			free(path_copy);
+			return (NULL);
+		}
+		sprintf(full_path, "%s/%s", dir, command);
+		if (stat(full_path, &st) == 0)
+		{
+			free(path_copy);
+			return (full_path);
+		}
+		free(full_path);
+		dir = strtok(NULL, ":");
+	}
+	free(path_copy);
+	return (NULL);
 }
