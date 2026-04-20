@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-void trim(char *str)
+void strip_whitespace(char *str)
 {
     int start = 0;
     int len;
@@ -52,7 +52,7 @@ int main(void)
             break;
         }
 
-        trim(input);
+        strip_whitespace(input);
 
         if (input[0] != '\0')
             execute(input);
