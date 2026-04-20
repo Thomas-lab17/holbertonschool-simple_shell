@@ -1,4 +1,16 @@
 #include "main.h"
+
+
+void trim(char *str)
+{
+    int len = strlen(str) - 1;
+
+    while (len >= 0 && (str[len] == '\n' || str[len] == ' ' || str[len] == '\t'))
+    {
+        str[len] = '\0';
+        len--;
+	}
+}
 /**
  * main - entry point of the shell program
  *
@@ -31,14 +43,3 @@ int main(void)
     return (0);
 }
 
-/* Strip trailing whitespace: newlines, spaces, tabs */
-void trim(char *str)
-{
-    int len = strlen(str) - 1;
-
-    while (len >= 0 && (str[len] == '\n' || str[len] == ' ' || str[len] == '\t'))
-    {
-        str[len] = '\0';
-        len--;
-	}
-}
