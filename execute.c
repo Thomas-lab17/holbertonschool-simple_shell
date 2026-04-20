@@ -25,11 +25,11 @@ void execute(char *command)
 
     if (pid == 0)
     {
-        if (execve(command, argv, environ) == -1)
-        {
-            fprintf(stderr, "./hsh: 1: %s: not found\n", command);
-            exit(EXIT_FAILURE);
-        }
+		if (execve(command, argv, environ) == -1)
+		{
+    		fprintf(stderr, "./hsh: 1: %s: not found\n", command);
+    		_exit(EXIT_FAILURE);   /* ← was exit(), must be _exit() */
+		}
     }
     else
     {
