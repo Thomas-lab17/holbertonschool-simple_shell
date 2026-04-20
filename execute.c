@@ -1,16 +1,20 @@
 #include "main.h"
-/**
- * execute_command - Executes a command using execve.
- *
- * @command: The command to execute (e.g., "ls").
- *
- * Return: 0 on success, or -1 on failure.
- */
 
+extern char **environ;
+
+/**
+ * execute - Executes a command using execve.
+ * @command: The command to execute (e.g., "/bin/ls").
+ * Return: void
+ */
 void execute(char *command)
 {
     pid_t pid;
     int status;
+    char *argv[2];
+
+    argv[0] = command;
+    argv[1] = NULL;
 
     pid = fork();
     if (pid == -1)
