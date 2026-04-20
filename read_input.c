@@ -1,11 +1,9 @@
 #include "main.h"
 /**
-*
-*
-*
-*
-*/
-
+ * read_input - Reads a line of input from the user.
+ *
+ * Return: A pointer to the input string.
+ */
 char *read_input(void)
 {
 	char *input;
