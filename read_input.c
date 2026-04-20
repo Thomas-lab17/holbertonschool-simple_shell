@@ -11,7 +11,7 @@ char *line = NULL;/* Buffer où getline va stocker la commande */
 size_t bufsize = 0; /* Taille du buffer (getline s'occupe de l'allouer) */
 ssize_t nread; /* Nombre de caractères lus */
 
- clearerr(stdin);   /* reset any EOF/error flags */
+
 /* getline alloue la mémoire automatiquement car line est NULL */
 nread = getline(&line, &bufsize, stdin);
 
