@@ -14,16 +14,16 @@ int main(void)
         display_prompt();
         input = read_input();
 
-        if (input == NULL)   /* Ctrl+D (EOF) */
-        {
-            write(STDOUT_FILENO, "\n", 1);
-            break;
-        }
+   		if (input == NULL)
+		{
+    		if (isatty(STDIN_FILENO))
+        	write(STDOUT_FILENO, "\n", 1);
+    		break;
+		}	
 
-        /* Strip the trailing newline left by getline */
         input[strcspn(input, "\n")] = '\0';
 
-        if (input[0] != '\0')  /* Ignore empty input */
+        if (input[0] != '\0')
             execute(input);
 
         free(input);
