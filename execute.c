@@ -1,16 +1,15 @@
 #include "main.h"
 
-extern char **environ;
-
 /**
  * execute - Forks and executes a command with its arguments.
  * @args: NULL-terminated array of strings (command + arguments).
+ *
  * Return: void
  */
 void execute(char **args)
 {
-	pid_t pid;
-	int status;
+	pid_t	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == -1)
