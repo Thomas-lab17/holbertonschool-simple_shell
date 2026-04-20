@@ -7,23 +7,27 @@
 
 int main(void)
 {
-char *input;
+    char *input;
 
-while (1)
-{
-display_prompt();
-input = read_input();
+    while (1)
+    {
+        display_prompt();
+        input = read_input();
 
-if (input != NULL)
-{
-printf("%s", input);
-free(input);
-}
-else
-{
-break;
-}
-}
-return (0);
+        if (input == NULL)   /* Ctrl+D (EOF) */
+        {
+            write(STDOUT_FILENO, "\n", 1);
+            break;
+        }
+
+        /* Strip the trailing newline left by getline */
+        input[strcspn(input, "\n")] = '\0';
+
+        if (input[0] != '\0')  /* Ignore empty input */
+            execute(input);
+
+        free(input);
+    }
+    return (0);
 }
 
