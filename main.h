@@ -14,6 +14,7 @@ char *read_input(void);
 char *get_path_value(void);
 char *get_path(const char *command);
 void execute(char *command);
+void  trim(char *str);
 
 
 #endif
