@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <errno.h> 
 
 extern char **environ;
 void display_prompt(void);
