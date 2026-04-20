@@ -3,13 +3,32 @@
 
 void trim(char *str)
 {
-    int len = strlen(str) - 1;
+    int start = 0;
+    int len;
 
+    /* Strip leading whitespace */
+    while (str[start] == ' ' || str[start] == '\t')
+        start++;
+
+    /* Shift string left if needed */
+    if (start > 0)
+    {
+        len = 0;
+        while (str[start + len] != '\0')
+        {
+            str[len] = str[start + len];
+            len++;
+        }
+        str[len] = '\0';
+    }
+
+    /* Strip trailing whitespace */
+    len = strlen(str) - 1;
     while (len >= 0 && (str[len] == '\n' || str[len] == ' ' || str[len] == '\t'))
     {
         str[len] = '\0';
         len--;
-	}
+    }
 }
 /**
  * main - entry point of the shell program
