@@ -8,8 +8,8 @@
  */
 char **tokenize(char *input)
 {
-	char	**args;
-	char	*token;
+	char **args;
+	char *token;
 	int	i = 0;
 
 	args = malloc(sizeof(char *) * 64);
