@@ -1,19 +1,21 @@
 #include "main.h"
-/**
-*
-*
-*
-*
-*/
 
+/**
+ * read_input - Reads a line of input from stdin.
+ *
+ * Return: A pointer to the input string, or NULL on failure or EOF.
+ */
 char *read_input(void)
 {
-	char *input;
-  size_t len = 0;
+	char	*line = NULL;
+	size_t	bufsize = 0;
+	ssize_t	nread;
 
-  getline (&input, &len, stdin);
-  return (input);
-  printf("%s", input);
-  free(input);
-
+	nread = getline(&line, &bufsize, stdin);
+	if (nread == -1)
+	{
+		free(line);
+		return (NULL);
+	}
+	return (line);
 }

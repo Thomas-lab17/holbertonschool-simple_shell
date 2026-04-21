@@ -1,14 +1,35 @@
 #include "main.h"
 
+/**
+ * main - Entry point of the shell program.
+ *
+ * Return: 0 on success, non-zero on failure.
+ */
 int main(void)
 {
 	char *input;
+	char **args;
 
-	display_prompt();
-	input = read_input();
-	if (input != NULL)
+	while (1)
 	{
-		printf("%s", input);
+		display_prompt();
+		input = read_input();
+		if (input == NULL)
+		{
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			break;
+		}
+		strip_whitespace(input);
+		if (input[0] != '\0')
+		{
+			args = tokenize(input);
+			if (args != NULL)
+			{
+				execute(args);
+				free(args);
+			}
+		}
 		free(input);
 	}
 	return (0);
