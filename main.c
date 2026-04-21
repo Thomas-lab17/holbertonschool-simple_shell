@@ -23,14 +23,20 @@ int main(void)
 		strip_whitespace(input);
 		if (input[0] != '\0')
 		{
-			args = tokenize(input);
-			if (args != NULL)
+			args = tokenize(input); //if the command entered was exit,
+			if (args != NULL) //frees up the args and input and closes the program
 			{
+				if (strcmp(args[0], "exit") == 0) //should exit gracefully?
+				{
+					free(args);
+					free(input);
+					break;
+				}
 				execute(args);
 				free(args);
 			}
 		}
-		free(input);
+		free(input); //exits 
 	}
 	return (0);
 }
