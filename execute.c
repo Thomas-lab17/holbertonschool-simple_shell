@@ -11,7 +11,10 @@ int execute(char **args)
 	pid_t	pid;
 	int	status;
 	char	*cmd_path;
-
+	if (handle_builtin(args))
+	{
+		return (0);
+	}
 	if (strchr(args[0], '/') != NULL)
 		cmd_path = strdup(args[0]);
 	else
@@ -21,6 +24,7 @@ int execute(char **args)
 		fprintf(stderr, "%s: 1: %s: not found\n", program_name, args[0]);
 		return (127);
 	}
+	
 	pid = fork();
 	if (pid == -1)
 	{
