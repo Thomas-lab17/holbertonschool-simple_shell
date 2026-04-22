@@ -11,13 +11,15 @@
 #include <errno.h>
 
 extern char **environ;
+extern char *program_name;
 
-void	display_prompt(void);
-char	*read_input(void);
-char	*get_path_value(void);
-char	*get_path(const char *command);
-void	execute(char **args);
-char	**tokenize(char *input);
-void	strip_whitespace(char *str);
+void display_prompt(void);
+char *read_input(void);
+char *get_path_value(void);
+char *get_path(const char *command);
+int	execute(char **args);
+char **tokenize(char *input);
+void strip_whitespace(char *str);
+int handle_builtin(char **args);
 
 #endif
