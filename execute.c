@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * execute - Forks and executes a command with its arguments.
  * @args: NULL-terminated array of strings (command + arguments).
@@ -24,7 +23,6 @@ int execute(char **args)
 		fprintf(stderr, "%s: 1: %s: not found\n", program_name, args[0]);
 		return (127);
 	}
-	
 	pid = fork();
 	if (pid == -1)
 	{
