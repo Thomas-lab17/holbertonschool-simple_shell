@@ -10,6 +10,7 @@
 
 - [Contents](#contents)
 - [Requirements](#requirements)
+- [Project Requirements](#project-requirements)
 - [Resources](#resources)
 - [Compilation](#compilation)
 - [Usage](#usage)
@@ -18,6 +19,12 @@
 
 
 ## Requirements
+
+Ubuntu 20.04
+GCC
+C
+
+## Project Requirements
 ```
 Allowed editors: vi, vim, emacs
 
@@ -61,7 +68,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
  - Compile it with [Compilation](#compilation)
  - run the executable
   ```bash
-.hsh
+./hsh
   ```
 
 ## Usage Example
@@ -86,9 +93,7 @@ $ exit
 ## Authors
 View the AUTHORS file in the repository
 ```
-Madi Madi Anli
-
-Thomas Charierleray
-
-Alexander Durant
+Madi Madi Anli | 12993@holbertonstudents.com | https://github.com/madi-spec49
+Thomas Charierleray | 12165@holbertonstudents.com | https://github.com/Thomas-lab17
+Alexander Durant | 12232@holbertonstudents.com | https://github.com/artemis-bunbun
 ```
