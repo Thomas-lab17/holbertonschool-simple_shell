@@ -55,7 +55,7 @@ Use system calls only when you need to (why?)
 
 Everything you need to know to start coding your own shell concept page (Holberton Intranet)
 
-![Shell Flowchart](./flowchart simple shell.png)
+![Shell Flowchart](./flowchart%20simple%20shell.png)
 
 
 ## Compilation
