@@ -9,6 +9,7 @@ int main(void)
 {
 	char *input;
 	char **args;
+	int j;
 
 	while (1)
 	{
@@ -27,6 +28,8 @@ int main(void)
 			if (args != NULL)
 			{
 				execute(args);
+				for (j = 0; args[j] != NULL; j++)
+					free(args[j]);
 				free(args);
 			}
 		}
@@ -34,3 +37,4 @@ int main(void)
 	}
 	return (0);
 }
+
