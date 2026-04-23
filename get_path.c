@@ -28,7 +28,7 @@ char *get_path_value(void)
  */
 char *get_path(const char *command)
 {
-	char		*path_env, *path_copy, *dir, *full_path;
+	char *path_env, *path_copy, *dir, *full_path;
 	struct stat	st;
 
 	path_env = get_path_value();
