@@ -55,6 +55,9 @@ Use system calls only when you need to (why?)
 
 Everything you need to know to start coding your own shell concept page (Holberton Intranet)
 
+![Shell Flowchart](./flowchart simple shell.png)
+
+
 ## Compilation
 ```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
