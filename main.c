@@ -1,5 +1,23 @@
 #include "main.h"
 
+<<<<<<< HEAD
+char *program_name = NULL;
+
+/**
+ * main - Entry point of the shell program.
+ * @argc: argument count (unused)
+ * @argv: argument vector; argv[0] is used as the program name in errors
+ *
+ * Return: The exit status of the last command executed.
+ */
+int main(int argc, char **argv)
+{
+	char	*input;
+	char	**args;
+	int	status = 0;
+=======
+int main(void)
+{
 char *program_name = NULL;
 
 /**
@@ -33,11 +51,17 @@ int main(int argc, char **argv)
 			args = tokenize(input);
 			if (args != NULL)
 			{
+				if (strcmp(args[0], "exit") == 0) //should exit gracefully?
+				{
+					free(args);
+					free(input);
+					break;
+				}
 				status = execute(args);
 				free(args);
 			}
 		}
-		free(input);
+		free(input); //exits 
 	}
 	return (status);
 }
