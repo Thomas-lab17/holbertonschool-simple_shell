@@ -1,9 +1,22 @@
 #include "main.h"
 
-int main(void)
-{
-	char *input;
+char *program_name = NULL;
 
+/**
+ * main - Entry point of the shell program.
+ * @argc: argument count (unused)
+ * @argv: argument vector; argv[0] is used as the program name in errors
+ *
+ * Return: The exit status of the last command executed.
+ */
+int main(int argc, char **argv)
+{
+	char	*input;
+	char	**args;
+	int	status = 0;
+
+	(void)argc;
+	program_name = argv[0];
 	while (1)
 	{
 		display_prompt();
@@ -14,13 +27,23 @@ int main(void)
 				write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
-		if (strcmp(input, "exit\n") == 0 || strcmp(input, "exit") == 0) //should exit gracefully?
+		strip_whitespace(input);
+		if (input[0] != '\0')
 		{
-			free(input);
-			break;
+			args = tokenize(input);
+			if (args != NULL)
+			{
+				if (strcmp(args[0], "exit") == 0) /*should exit gracefully? */
+				{
+					free(args);
+					free(input);
+					break;
+				}
+				status = execute(args);
+				free(args);
+			}
 		}
-		printf("%s", input);
-		free(input); //exits 
+		free(input); /* exits */
 	}
-	return (0);
+	return (status);
 }
