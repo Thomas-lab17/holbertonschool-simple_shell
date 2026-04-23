@@ -33,11 +33,17 @@ int main(int argc, char **argv)
 			args = tokenize(input);
 			if (args != NULL)
 			{
+				if (strcmp(args[0], "exit") == 0) /*should exit gracefully? */
+				{
+					free(args);
+					free(input);
+					break;
+				}
 				status = execute(args);
 				free(args);
 			}
 		}
-		free(input);
+		free(input); /* exits */
 	}
 	return (status);
 }
