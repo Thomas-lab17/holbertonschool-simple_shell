@@ -10,7 +10,7 @@ int execute(char **args)
 	pid_t	pid;
 	int	status;
 	char	*cmd_path;
-	
+
 	if (handle_builtin(args))
 		return (0);
 	if (strchr(args[0], '/') != NULL)
