@@ -11,9 +11,7 @@ int execute(char **args)
 	int	status;
 	char	*cmd_path;
 	if (handle_builtin(args))
-	{
 		return (0);
-	}
 	if (strchr(args[0], '/') != NULL)
 		cmd_path = strdup(args[0]);
 	else
@@ -40,12 +38,9 @@ int execute(char **args)
 			_exit(127);
 		}
 	}
-	else
-	{
 		waitpid(pid, &status, 0);
 		free(cmd_path);
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
-	}
 	return (0);
 }
